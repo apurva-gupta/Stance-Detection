@@ -1,0 +1,48 @@
+from sklearn.ensemble import RandomForestClassifier as rf
+from sklearn.metrics import accuracy_score
+import numpy as np
+
+file_in = open('climatetrain.out', 'r')
+data = ""
+for line in file_in:
+  data += line
+data = data.split("\n")
+
+
+train = [x.split(",") for x in data if x!='']
+train_features = []
+train_labels = []
+for i in range(0,len(train)):
+  features = [int(train[i][x]) for x in range(0,len(train[i])-1) ]
+  train_features.append(features)
+  train_labels.append(train[i][len(train[i])-1])
+  if(len(train_features[i])!=len(train_features[0])):
+    train_features[i].append('0')
+    print("here")
+    print(len(train_features[i]))
+file_in = open('climatetest.out', 'r')
+
+data = ""
+for line in file_in:
+  data += line
+data = data.split("\n")
+test = [x.split(",") for x in data if x!='']
+test_features = []
+test_labels = []
+for i in range(0,len(test)):
+  features = [int(test[i][x]) for x in range(0,len(test[i])-1)]
+  test_features.append(features)
+  test_labels.append(test[i][len(test[i])-1])
+  if(len(test_features[i])!=len(test_features[0])):
+    test_features[i].append('0')
+    print("here in test")
+    print(len(test_features[i]))
+
+np.array(train_features)
+
+RF=rf()
+RF.fit(train_features,train_labels)
+prediction = RF.predict(test_features)
+print("Predicted labels",prediction)
+accuracy = accuracy_score(test_labels,prediction)
+print("Accuracy for Feminist Movement Malt Parser = ",accuracy)
