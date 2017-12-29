@@ -1,2 +1,4 @@
-# Stance-Detection
-Stance Detection of Tweets using various CL Approaches
+# Stance-Detection-
+Stance detection of tweets using Computational Linguistic Techniques
+
+Please read the report for further details.
